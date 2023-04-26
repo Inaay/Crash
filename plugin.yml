@@ -3,7 +3,7 @@ version: 1.0.0
 api: [4.0.0]
 main: Inaayat\Crash\Main
 author: Inaayat
-description: Crash players using command
+description: Crash players game
 website: https://github.com/Inaay/Crash
 
 permissions:
