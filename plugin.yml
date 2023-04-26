@@ -1,0 +1,12 @@
+name: Crash
+version: 1.0.0
+api: [4.0.0]
+main: Inaayat\Crash\Main
+author: Inaayat
+description: Crash players using command
+website: https://github.com/Inaay/Crash
+
+permissions:
+  crash.command:
+    default: op
+    description: Crash players
