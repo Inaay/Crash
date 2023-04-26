@@ -1,18 +1,17 @@
 <?php
 
 /**
- *
- *  ██ ███    ██  █████   █████  ██    ██  █████  ████████
- *  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
- *  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
- *  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
- *  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
-
- *
- * @author Inaayat
- * @link https://github.com/Inaay
- *
- */
+*
+*  ██ ███    ██  █████   █████  ██    ██  █████  ████████
+*  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
+*  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
+*  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
+*  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
+*
+* @author Inaayat
+* @link https://github.com/Inaay
+*
+*/
 
 declare(strict_types=1);
 
@@ -32,15 +31,15 @@ class Main extends PluginBase {
 	 */
 	private static $instance;
 
-    /**
-     * @var int
-     */
-    public const CRASH_FAST_MODE = 0;
+	/**
+	 * @var int
+	 */
+	public const CRASH_FAST_MODE = 0;
 
-    /**
-     * @var int
-     */
-    public const CRASH_SLOW_MODE = 1;
+	/**
+	 * @var int
+	 */
+	public const CRASH_SLOW_MODE = 1;
 
 	/**
 	 * @return void
@@ -65,11 +64,11 @@ class Main extends PluginBase {
 	 */
 	public function crashPlayer(Player $player, int $mode = self::CRASH_FAST_MODE): void {
 		if ($mode === self::CRASH_FAST_MODE) {
-            $player->getNetworkSession()->sendDataPacket(RemoveActorPacket::create($player->getId()));
-        } elseif ($mode === self::CRASH_SLOW_MODE) {
+			$player->getNetworkSession()->sendDataPacket(RemoveActorPacket::create($player->getId()));
+		} elseif ($mode === self::CRASH_SLOW_MODE) {
 			$oldPosition = $player->getPosition();
-            $player->teleport(new Position($player->getPosition()->getX(), Limits::INT32_MAX - 1, $player->getPosition()->getY(), $player->getWorld()));
+			$player->teleport(new Position($player->getPosition()->getX(), Limits::INT32_MAX - 1, $player->getPosition()->getY(), $player->getWorld()));
 			$player->teleport($oldPosition);
-        }
+		}
 	}
 }
