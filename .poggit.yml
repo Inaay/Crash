@@ -4,6 +4,6 @@ branches:
 - main
 projects:
   Crash:
-    icon: meta/icon.png
+    icon: meta/logo.png
     path: ""
 ...
