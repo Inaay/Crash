@@ -1,6 +1,8 @@
 # Crash
 A pocketmine Crash plugin where you can easily crash players game using a simple command.
 
+![image](https://github.com/Inaay/Crash/blob/main/meta/logo.png)
+
 ## Usage:
 * Permission: crash.command
 ```cmd
