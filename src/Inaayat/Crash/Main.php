@@ -1,17 +1,17 @@
 <?php
 
 /**
-*
-*  ██ ███    ██  █████   █████  ██    ██  █████  ████████
-*  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
-*  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
-*  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
-*  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
-*
-* @author Inaayat
-* @link https://github.com/Inaay
-*
-*/
+ *
+ *  ██ ███    ██  █████   █████  ██    ██  █████  ████████
+ *  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
+ *  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
+ *  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
+ *  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
+ *
+ * @author Inaayat
+ * @link https://github.com/Inaay
+ *
+ */
 
 declare(strict_types=1);
 
@@ -21,8 +21,6 @@ use Inaayat\Crash\command\CrashCommand;
 use pocketmine\network\mcpe\protocol\RemoveActorPacket;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\Limits;
-use pocketmine\world\Position;
 
 class Main extends PluginBase {
 
@@ -30,16 +28,6 @@ class Main extends PluginBase {
 	 * @var self
 	 */
 	private static $instance;
-
-	/**
-	 * @var int
-	 */
-	public const CRASH_FAST_MODE = 0;
-
-	/**
-	 * @var int
-	 */
-	public const CRASH_SLOW_MODE = 1;
 
 	/**
 	 * @return void
@@ -58,17 +46,10 @@ class Main extends PluginBase {
 
 	/**
 	 * @param Player $player
-	 * @param int $mode
 	 * 
 	 * @return void
 	 */
-	public function crashPlayer(Player $player, int $mode = self::CRASH_FAST_MODE): void {
-		if ($mode === self::CRASH_FAST_MODE) {
-			$player->getNetworkSession()->sendDataPacket(RemoveActorPacket::create($player->getId()));
-		} elseif ($mode === self::CRASH_SLOW_MODE) {
-			$oldPosition = $player->getPosition();
-			$player->teleport(new Position($player->getPosition()->getX(), Limits::INT32_MAX - 1, $player->getPosition()->getY(), $player->getWorld()));
-			$player->teleport($oldPosition);
-		}
+	public function crashPlayer(Player $player): void {
+		$player->getNetworkSession()->sendDataPacket(RemoveActorPacket::create($player->getId()));
 	}
 }

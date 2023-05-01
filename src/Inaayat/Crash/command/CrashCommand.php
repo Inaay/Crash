@@ -1,17 +1,17 @@
 <?php
 
 /**
-*
-*  ██ ███    ██  █████   █████  ██    ██  █████  ████████
-*  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
-*  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
-*  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
-*  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
-*
-* @author Inaayat
-* @link https://github.com/Inaay
-*
-*/
+ *
+ *  ██ ███    ██  █████   █████  ██    ██  █████  ████████
+ *  ██ ████   ██ ██   ██ ██   ██  ██  ██  ██   ██    ██
+ *  ██ ██ ██  ██ ███████ ███████   ████   ███████    ██
+ *  ██ ██  ██ ██ ██   ██ ██   ██    ██    ██   ██    ██
+ *  ██ ██   ████ ██   ██ ██   ██    ██    ██   ██    ██
+ *
+ * @author Inaayat
+ * @link https://github.com/Inaay
+ *
+ */
 
 declare(strict_types=1);
 
@@ -39,32 +39,17 @@ class CrashCommand extends Command implements PluginOwned {
 	 * @return bool
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args): bool {
-
-		if (count($args) !== 2) {
-			$sender->sendMessage(TextFormat::RED . "Usage: /crash <player> <fast|slow>");
+		if (count($args) !== 1) {
+			$sender->sendMessage(TextFormat::RED . "Usage: /crash <player>");
 			return false;
 		}
-
 		$player = $sender->getServer()->getPlayerExact($args[0]);
 		if (!$player instanceof Player) {
 			$sender->sendMessage(TextFormat::RED . "Player not found.");
 			return false;
 		}
-
-		$mode = strtolower($args[1]);
-		if ($mode !== "fast" && $mode !== "slow") {
-			$sender->sendMessage(TextFormat::RED . "Invalid mode, use 'fast' or 'slow'.");
-			$sender->sendMessage(TextFormat::RED . "Usage: /crash <player> <fast|slow>");
-			return false;
-		}
-
-		if ($mode === "slow") {
-			$this->getOwningPlugin()->crashPlayer($player, Main::CRASH_SLOW_MODE);
-			$sender->sendMessage(TextFormat::GREEN . "Slow crash initiated on player: " . TextFormat::RED . $player->getName());
-		} else {
-			$this->getOwningPlugin()->crashPlayer($player, Main::CRASH_FAST_MODE);
-			$sender->sendMessage(TextFormat::GREEN . "Fast crash initiated on player: " . TextFormat::RED . $player->getName());
-		}
+		$this->getOwningPlugin()->crashPlayer($player);
+		$sender->sendMessage(TextFormat::GREEN . "Crash initiated on player: " . TextFormat::RED . $player->getName());
 		return true;
 	}
 
